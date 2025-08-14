@@ -26,7 +26,8 @@ const persons = [
         ciudad: "Guasave",
         direccion:"Mar",
         id: "1112-1111-111-111",
-        age:17
+        age:17,
+        activo:true
     },
     {
         nombre: "Noe",
@@ -57,6 +58,8 @@ const typeDefinitions = gql`
     age:Int!
     puedeBeber:Boolean!
     hasPhone: Boolean!
+    activo:Boolean
+    hasActiveStatus: Boolean!
   }
 
   type Query {
@@ -81,7 +84,9 @@ const resolvers = {
   ubicacion: (root) => `${root.direccion}, ${root.ciudad}`,
   check: () => "Listo",
   puedeBeber: (root) => root.age >= 18,
-  hasPhone: (root) => root.telefono !== null && root.telefono !==undefined
+  hasPhone: (root) => root.telefono !== null && root.telefono !==undefined,
+  activo: (root) => root.activo !== null && root.activo !== undefined ? root.activo : false,
+  hasActiveStatus: (root) => root.activo === true
 }
 };
 
