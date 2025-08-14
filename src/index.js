@@ -31,7 +31,7 @@ const persons = [
     {
         nombre: "Noe",
         apellidos: { primero: "Diaz", segundo: "Gallardo" },
-        telefono: 687121212,
+        //telefono: 687121212,
         ciudad: "Guasave",
         direccion:"Montañas",
         id: "1112-1111-111-111",
@@ -56,6 +56,7 @@ const typeDefinitions = gql`
     id: ID!
     age:Int!
     puedeBeber:Boolean!
+    hasPhone: Boolean!
   }
 
   type Query {
@@ -79,7 +80,8 @@ const resolvers = {
     Persona: {
   ubicacion: (root) => `${root.direccion}, ${root.ciudad}`,
   check: () => "Listo",
-  puedeBeber: (root) => root.age >= 18
+  puedeBeber: (root) => root.age >= 18,
+  hasPhone: (root) => root.telefono !== null && root.telefono !==undefined
 }
 };
 
